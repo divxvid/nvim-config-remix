@@ -8,12 +8,12 @@ vim.g.have_nerd_font = true
 
 local keymap = vim.keymap
 
-keymap.set("i", "jk", "<ESC>")
-keymap.set("n", "<leader>e", ":Explore<CR>")
-keymap.set("n", "<leader>dd", ":bdelete<CR>")
+keymap.set('i', 'jk', '<ESC>')
+keymap.set('n', '<leader>e', ':Explore<CR>')
+keymap.set('n', '<leader>dd', ':bdelete<CR>')
 
 --clears the search highlight on pressing <ESC> in normal mode
-keymap.set("n", "<ESC>", "<cmd>nohlsearch<CR>")
+keymap.set('n', '<ESC>', '<cmd>nohlsearch<CR>')
 
 -- Keybinds to make split navigation easier.
 -- Use CTRL+<hjkl> to switch between windows

@@ -21,18 +21,17 @@ opt.smartcase = true -- if you include mixed case in your search, assumes you wa
 opt.cursorline = true -- highlight the current cursor line
 
 -- clipboard
-opt.clipboard:append("unnamedplus") -- use system clipboard as default register
+opt.clipboard:append 'unnamedplus' -- use system clipboard as default register
 
 opt.list = true
--- opt.listchars = { tab = "?", trail = "·", nbsp = "␣", eol = "↴" }
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣", eol = "↴" }
--- opt.listchars:append("eol:↴")
+-- opt.listchars = { tab = "» ", trail = "·", nbsp = "␣", eol = "↴" }
+opt.listchars:append 'eol:↴'
 --opt.listchars:append "eol:~"
 
 -- Minimal number of screen lines to keep above and below the cursor.
 opt.scrolloff = 10
 
-opt.mouse = "a" --Enable mouse mode. Useful in resizing splits etc
+opt.mouse = 'a' --Enable mouse mode. Useful in resizing splits etc
 
 --Don't show the mode since it's already in the status line
 opt.showmode = false
@@ -41,7 +40,7 @@ opt.showmode = false
 opt.breakindent = true
 
 --keep signcolumn on by default
-opt.signcolumn = "yes"
+opt.signcolumn = 'yes'
 
 --Decrease Update time
 opt.updatetime = 250
@@ -51,7 +50,7 @@ opt.updatetime = 250
 opt.timeoutlen = 300
 
 -- Preview substitutions live as we type
-opt.inccommand = "split"
+opt.inccommand = 'split'
 
 -- Set highlight on search, but clear on pressing <ESC> in normal mode
 -- ESC part is set in keymaps file
