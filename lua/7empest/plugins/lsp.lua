@@ -136,7 +136,7 @@ return {
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- clangd = {},
-        -- gopls = {},
+        gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -146,7 +146,6 @@ return {
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
-        --
 
         lua_ls = {
           -- cmd = {...},
@@ -192,6 +191,32 @@ return {
           end,
         },
       }
+
+      --Handling lexical separately
+      local lspconfig = require 'lspconfig'
+      local configs = require 'lspconfig.configs'
+
+      local lexical_config = {
+        filetypes = { 'elixir', 'eelixir', 'heex' },
+        cmd = { '/home/tempest/Elixir/lexical/_build/dev/package/lexical/bin/start_lexical.sh' },
+        settings = {},
+      }
+
+      if not configs.lexical then
+        configs.lexical = {
+          default_config = {
+            filetypes = lexical_config.filetypes,
+            cmd = lexical_config.cmd,
+            root_dir = function(fname)
+              return lspconfig.util.root_pattern('mix.exs', '.git')(fname) or vim.loop.os_homedir()
+            end,
+            -- optional settings
+            settings = lexical_config.settings,
+          },
+        }
+      end
+
+      lspconfig.lexical.setup {}
     end,
   },
 }
