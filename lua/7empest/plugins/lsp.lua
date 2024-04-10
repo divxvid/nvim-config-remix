@@ -163,7 +163,18 @@ return {
         },
 
         elixirls = {
-            cmd = { "/home/tempest/.elixir-ls/release/language_server.sh" },
+          cmd = { '/home/tempest/.elixir-ls/release/language_server.sh' },
+        },
+
+        tailwindcss = {
+          filetypes_include = { 'heex' },
+          init_options = {
+            userLanguages = {
+              elixir = 'html-eex',
+              eelixir = 'html-eex',
+              heex = 'html-eex',
+            },
+          },
         },
       }
 
