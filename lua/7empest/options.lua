@@ -55,3 +55,4 @@ opt.inccommand = 'split'
 -- Set highlight on search, but clear on pressing <ESC> in normal mode
 -- ESC part is set in keymaps file
 opt.hlsearch = true
+opt.termguicolors = true
