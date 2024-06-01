@@ -1,28 +1,20 @@
 return {
-  {
-    'RRethy/base16-nvim',
-    config = function()
-      require('base16-colorscheme').with_config {
-        telescope = false,
-        indentblankline = true,
-        notify = true,
-        ts_rainbow = true,
-        cmp = false,
-        illuminate = true,
-        dapui = true,
-      }
-    end,
-    init = function()
-      vim.cmd.colorscheme 'base16-default-dark'
-    end,
-  },
   -- {
-  --   'tjdevries/colorbuddy.nvim',
-  --   priority = 1000, --make sure this loads before all other plugins
+  --   'craftzdog/solarized-osaka.nvim',
+  --   lazy = false,
+  --   priority = 1000,
+  --   opts = {},
   --   init = function()
-  --     vim.cmd.colorscheme 'gruvbuddy'
+  --     vim.cmd.colorscheme 'solarized-osaka'
   --   end,
   -- },
+  {
+    'tjdevries/colorbuddy.nvim',
+    priority = 1000, --make sure this loads before all other plugins
+    init = function()
+      vim.cmd.colorscheme 'gruvbuddy'
+    end,
+  },
   -- {
   --   'navarasu/onedark.nvim',
   --   priority = 1000,

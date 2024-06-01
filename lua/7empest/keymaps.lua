@@ -29,3 +29,6 @@ keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagn
 keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 keymap.set('n', '<leader>cd', vim.diagnostic.open_float, { desc = 'Show [C]ode [D]iagnotics' })
 keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+
+-- oil nvim config
+keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory in oil' })
