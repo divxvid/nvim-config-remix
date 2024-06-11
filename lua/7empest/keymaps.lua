@@ -32,3 +32,6 @@ keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnosti
 
 -- oil nvim config
 keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory in oil' })
+
+-- add a closing bracket with indent, good for lots of stuff
+keymap.set('i', '{<CR>', '{<CR>}<ESC>O')

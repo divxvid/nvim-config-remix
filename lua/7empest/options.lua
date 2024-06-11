@@ -23,10 +23,10 @@ opt.cursorline = true -- highlight the current cursor line
 -- clipboard
 opt.clipboard:append 'unnamedplus' -- use system clipboard as default register
 
-opt.list = true
+-- opt.list = true
 -- opt.listchars = { tab = "» ", trail = "·", nbsp = "␣", eol = "↴" }
 -- opt.listchars:append 'eol:↴'
-opt.listchars:append 'eol:~'
+-- opt.listchars:append 'eol:~'
 
 -- Minimal number of screen lines to keep above and below the cursor.
 opt.scrolloff = 10
