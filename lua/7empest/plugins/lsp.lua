@@ -166,7 +166,6 @@ return {
         -- elixirls = {
         --   cmd = { '/home/tempest/Downloads/elixir-ls/launch.sh' },
         -- },
-        lexical = {},
 
         tailwindcss = {
           filetypes_include = { 'heex' },
