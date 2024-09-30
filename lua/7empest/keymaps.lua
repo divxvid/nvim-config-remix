@@ -11,6 +11,8 @@ local keymap = vim.keymap
 keymap.set('i', 'jk', '<ESC>')
 keymap.set('n', '<leader>e', ':Explore<CR>', { desc = 'Open NetRW file explorer' })
 keymap.set('n', '<leader>dd', ':bdelete<CR>', { desc = 'Deletes the current buffer' })
+keymap.set('n', 'j', 'gj', { desc = 'move visual lines instead of real lines' })
+keymap.set('n', 'k', 'gk', { desc = 'move visual lines instead of real lines' })
 
 --clears the search highlight on pressing <ESC> in normal mode
 keymap.set('n', '<ESC>', '<cmd>nohlsearch<CR>')
