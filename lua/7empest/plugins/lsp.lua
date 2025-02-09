@@ -138,6 +138,9 @@ return {
         -- clangd = {},
         gopls = {},
         zls = {},
+        ocamllsp = {
+          cmd = { '/home/tempest/.opam/default/bin/ocamllsp' },
+        },
         -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -163,9 +166,9 @@ return {
           },
         },
 
-        -- elixirls = {
-        --   cmd = { '/home/tempest/Downloads/elixir-ls/launch.sh' },
-        -- },
+        elixirls = {
+          cmd = { '/home/tempest/.local/share/nvim-remix/mason/packages/elixir-ls/language_server.sh' },
+        },
 
         tailwindcss = {
           filetypes_include = { 'heex' },
@@ -209,30 +212,30 @@ return {
       }
 
       --Handling lexical separately
-      local lspconfig = require 'lspconfig'
-      local configs = require 'lspconfig.configs'
-
-      local lexical_config = {
-        filetypes = { 'elixir', 'eelixir', 'heex' },
-        cmd = { '/home/tempest/Downloads/lexical/_build/dev/package/lexical/bin/start_lexical.sh' },
-        settings = {},
-      }
-
-      if not configs.lexical then
-        configs.lexical = {
-          default_config = {
-            filetypes = lexical_config.filetypes,
-            cmd = lexical_config.cmd,
-            root_dir = function(fname)
-              return lspconfig.util.root_pattern('mix.exs', '.git')(fname) or vim.loop.os_homedir()
-            end,
-            -- optional settings
-            settings = lexical_config.settings,
-          },
-        }
-      end
-
-      lspconfig.lexical.setup {}
+      -- local lspconfig = require 'lspconfig'
+      -- local configs = require 'lspconfig.configs'
+      --
+      -- local lexical_config = {
+      --   filetypes = { 'elixir', 'eelixir', 'heex' },
+      --   cmd = { '/home/tempest/Downloads/lexical/_build/dev/package/lexical/bin/start_lexical.sh' },
+      --   settings = {},
+      -- }
+      --
+      -- if not configs.lexical then
+      --   configs.lexical = {
+      --     default_config = {
+      --       filetypes = lexical_config.filetypes,
+      --       cmd = lexical_config.cmd,
+      --       root_dir = function(fname)
+      --         return lspconfig.util.root_pattern('mix.exs', '.git')(fname) or vim.loop.os_homedir()
+      --       end,
+      --       -- optional settings
+      --       settings = lexical_config.settings,
+      --     },
+      --   }
+      -- end
+      --
+      -- lspconfig.lexical.setup {}
     end,
   },
 }
