@@ -1,10 +1,28 @@
 return {
   {
-    'RRethy/base16-nvim',
+    'Shatur/neovim-ayu',
     init = function()
-      vim.cmd.colorscheme 'base16-black-metal-gorgoroth'
+      vim.cmd.colorscheme 'ayu-mirage'
     end,
   },
+  -- {
+  --   'savq/melange-nvim',
+  --   init = function()
+  --     vim.cmd.colorscheme 'melange'
+  --   end,
+  -- },
+  -- {
+  --   'EdenEast/nightfox.nvim',
+  --   init = function()
+  --     vim.cmd.colorscheme 'duskfox'
+  --   end,
+  -- },
+  -- {
+  --   'RRethy/base16-nvim',
+  --   init = function()
+  --     vim.cmd.colorscheme 'base16-black-metal-gorgoroth'
+  --   end,
+  -- },
   -- {
   --   'vague2k/vague.nvim',
   --   config = function()
