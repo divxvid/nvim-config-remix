@@ -1,10 +1,10 @@
 return {
-  {
-    'Shatur/neovim-ayu',
-    init = function()
-      vim.cmd.colorscheme 'ayu-mirage'
-    end,
-  },
+  -- {
+  --   'Shatur/neovim-ayu',
+  --   init = function()
+  --     vim.cmd.colorscheme 'ayu-mirage'
+  --   end,
+  -- },
   -- {
   --   'savq/melange-nvim',
   --   init = function()
@@ -185,28 +185,28 @@ return {
   --     vim.cmd 'colorscheme rose-pine'
   --   end,
   -- },
-  -- {
-  --   'blazkowolf/gruber-darker.nvim',
-  --   opts = {
-  --     bold = true,
-  --     invert = {
-  --       signs = false,
-  --       tabline = false,
-  --       visual = false,
-  --     },
-  --     italic = {
-  --       strings = false,
-  --       comments = true,
-  --       operators = false,
-  --       folds = true,
-  --     },
-  --     undercurl = true,
-  --     underline = true,
-  --   },
-  --   init = function()
-  --     vim.cmd.colorscheme 'gruber-darker'
-  --   end,
-  -- },
+  {
+    'blazkowolf/gruber-darker.nvim',
+    opts = {
+      bold = true,
+      invert = {
+        signs = false,
+        tabline = false,
+        visual = false,
+      },
+      italic = {
+        strings = false,
+        comments = true,
+        operators = false,
+        folds = true,
+      },
+      undercurl = true,
+      underline = true,
+    },
+    init = function()
+      vim.cmd.colorscheme 'gruber-darker'
+    end,
+  },
   -- {
   --   'ellisonleao/gruvbox.nvim',
   --   lazy = false,

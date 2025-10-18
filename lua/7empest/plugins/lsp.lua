@@ -166,9 +166,9 @@ return {
           },
         },
 
-        elixirls = {
-          cmd = { '/home/tempest/.local/share/nvim-remix/mason/packages/elixir-ls/language_server.sh' },
-        },
+        -- elixirls = {
+        --   cmd = { '/home/tempest/.local/share/nvim-remix/mason/packages/elixir-ls/language_server.sh' },
+        -- },
 
         tailwindcss = {
           filetypes_include = { 'heex' },
@@ -210,6 +210,30 @@ return {
           end,
         },
       }
+
+      --Handing expert separately
+      local lspconfig = require 'lspconfig'
+      local configs = require 'lspconfig.configs'
+
+      -- Shim expert if missing
+      if not configs.expert then
+        configs.expert = {
+          default_config = {
+            cmd = { '/home/tempest/Elixir/expert/apps/expert/burrito_out/expert_linux_amd64' },
+            filetypes = { 'elixir', 'eelixir', 'heex' },
+            root_dir = lspconfig.util.root_pattern('mix.exs', '.git'),
+            single_file_support = true,
+          },
+          docs = {
+            description = [[
+https://github.com/elixir-expert/expert
+Expert is the official language server implementation for the Elixir programming language.
+]],
+          },
+        }
+      end
+
+      lspconfig.expert.setup {}
 
       --Handling lexical separately
       -- local lspconfig = require 'lspconfig'
