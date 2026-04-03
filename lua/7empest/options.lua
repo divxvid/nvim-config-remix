@@ -5,10 +5,12 @@ opt.number = true
 
 -- tabs & indentation
 opt.tabstop = 4
+opt.softtabstop = 4
 opt.shiftwidth = 4
 opt.expandtab = true
 opt.autoindent = true
 opt.smarttab = true
+opt.cindent = true
 
 -- line wrapping
 opt.wrap = false -- disable line wrapping
@@ -24,7 +26,7 @@ opt.cursorline = true -- highlight the current cursor line
 opt.clipboard:append 'unnamedplus' -- use system clipboard as default register
 
 -- opt.list = true
--- opt.listchars = { tab = "» ", trail = "·", nbsp = "␣", eol = "↴" }
+-- opt.listchars = { tab = '» ', trail = '·', nbsp = '␣', eol = '↴' }
 -- opt.listchars:append 'eol:↴'
 -- opt.listchars:append 'eol:~'
 

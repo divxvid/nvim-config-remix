@@ -136,11 +136,11 @@ return {
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- clangd = {},
-        gopls = {},
-        zls = {},
-        ocamllsp = {
-          cmd = { '/home/tempest/.opam/default/bin/ocamllsp' },
-        },
+        -- gopls = {},
+        -- zls = {},
+        -- ocamllsp = {
+        --   cmd = { '/home/tempest/.opam/default/bin/ocamllsp' },
+        -- },
         -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -216,24 +216,24 @@ return {
       local configs = require 'lspconfig.configs'
 
       -- Shim expert if missing
-      if not configs.expert then
-        configs.expert = {
-          default_config = {
-            cmd = { '/home/tempest/Elixir/expert/apps/expert/burrito_out/expert_linux_amd64' },
-            filetypes = { 'elixir', 'eelixir', 'heex' },
-            root_dir = lspconfig.util.root_pattern('mix.exs', '.git'),
-            single_file_support = true,
-          },
-          docs = {
-            description = [[
-https://github.com/elixir-expert/expert
-Expert is the official language server implementation for the Elixir programming language.
-]],
-          },
-        }
-      end
-
-      lspconfig.expert.setup {}
+      --       if not configs.expert then
+      --         configs.expert = {
+      --           default_config = {
+      --             cmd = { '/home/tempest/Elixir/expert/apps/expert/burrito_out/expert_linux_amd64' },
+      --             filetypes = { 'elixir', 'eelixir', 'heex' },
+      --             root_dir = lspconfig.util.root_pattern('mix.exs', '.git'),
+      --             single_file_support = true,
+      --           },
+      --           docs = {
+      --             description = [[
+      -- https://github.com/elixir-expert/expert
+      -- Expert is the official language server implementation for the Elixir programming language.
+      -- ]],
+      --           },
+      --         }
+      --       end
+      --
+      --       lspconfig.expert.setup {}
 
       --Handling lexical separately
       -- local lspconfig = require 'lspconfig'
