@@ -10,7 +10,7 @@ opt.shiftwidth = 4
 opt.expandtab = true
 opt.autoindent = true
 opt.smarttab = true
-opt.cindent = true
+-- opt.cindent = true
 
 -- line wrapping
 opt.wrap = false -- disable line wrapping
