@@ -79,35 +79,28 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup('my.lsp', {}),
-  callback = function(ev)
-    local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
-    if client:supports_method('textDocument/implementation') then
-      -- Create a keymap for vim.lsp.buf.implementation ...
-    end
-    -- Enable auto-completion. Note: Use CTRL-Y to select an item. |complete_CTRL-Y|
-    if client:supports_method('textDocument/completion') then
-      -- Optional: trigger autocompletion on EVERY keypress. May be slow!
-      -- local chars = {}; for i = 32, 126 do table.insert(chars, string.char(i)) end
-      -- client.server_capabilities.completionProvider.triggerCharacters = chars
-      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-    end
-    -- Auto-format ("lint") on save.
-    -- Usually not needed if server supports "textDocument/willSaveWaitUntil".
-    if not client:supports_method('textDocument/willSaveWaitUntil')
-        and client:supports_method('textDocument/formatting') then
-      vim.api.nvim_create_autocmd('BufWritePre', {
-        group = vim.api.nvim_create_augroup('my.lsp', { clear = false }),
-        buffer = ev.buf,
-        callback = function()
-          vim.lsp.buf.format({ bufnr = ev.buf, id = client.id, timeout_ms = 1000 })
-        end,
-      })
-    end
-  end,
-})
+------------------------------------------------TREESITTER-----------------------------------------------------------
+-- NEOVIM Docs: https://neovim.io/doc/user/treesitter/#treesitter
+-- Install treesitter CLI from: https://github.com/tree-sitter/tree-sitter/releases
+-- Add tree-sitter executable to PATH and make sure it's working
+-- List of parser repositories is available here: https://github.com/tree-sitter/tree-sitter/wiki/List-of-parsers
+-- Clone the repo down and generate/build the parser using `tree-sitter generate/build` command
+-- Put the compiled parser under nvim-data/site/parser directory
+-- It will be picked up automatically or check `:chechhealth vim.treesitter`
+--
+-- To add new parsers with custom file path we can use:
+-- vim.treesitter.language.add('python', { path = "/path/to/python.so" })
+--
+-- To register a named parser for specific filetype, we can use:
+-- vim.treesitter.language.register('xml', { 'svg', 'xslt' })
 
+-- vim.api.nvim_create_autocmd('FileType', {
+--   pattern = 'cpp',
+--   callback = function(ev)
+--     vim.treesitter.start(ev.buf, 'cpp')
+--     vim.bo[ev.buf].syntax = 'ON' -- only if additional legacy syntax is needed
+--   end
+-- })
 ------------------------------------------------LSP---------------------------------------------------------------
 ---NEOVIM LSP Docs: https://neovim.io/doc/user/lsp/#lsp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -144,6 +137,35 @@ vim.lsp.config['lua_ls'] = {
 }
 
 vim.lsp.enable('lua_ls')
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup('my.lsp', {}),
+  callback = function(ev)
+    local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
+    if client:supports_method('textDocument/implementation') then
+      -- Create a keymap for vim.lsp.buf.implementation ...
+    end
+    -- Enable auto-completion. Note: Use CTRL-Y to select an item. |complete_CTRL-Y|
+    if client:supports_method('textDocument/completion') then
+      -- Optional: trigger autocompletion on EVERY keypress. May be slow!
+      -- local chars = {}; for i = 32, 126 do table.insert(chars, string.char(i)) end
+      -- client.server_capabilities.completionProvider.triggerCharacters = chars
+      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+    end
+    -- Auto-format ("lint") on save.
+    -- Usually not needed if server supports "textDocument/willSaveWaitUntil".
+    if not client:supports_method('textDocument/willSaveWaitUntil')
+        and client:supports_method('textDocument/formatting') then
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        group = vim.api.nvim_create_augroup('my.lsp', { clear = false }),
+        buffer = ev.buf,
+        callback = function()
+          vim.lsp.buf.format({ bufnr = ev.buf, id = client.id, timeout_ms = 1000 })
+        end,
+      })
+    end
+  end,
+})
 
 ------------------------------------------------PACKAGES-----------------------------------------------------------
 ---Documentation: https://neovim.io/doc/user/pack/
