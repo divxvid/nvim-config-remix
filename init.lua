@@ -17,7 +17,7 @@ vim.opt.wrap = false
 
 -- search settings
 vim.opt.ignorecase = true --ignore case when searching
-vim.opt.smartcase = true -- if you include mixed case in your search, assumes you want case-sensitive
+vim.opt.smartcase = true  -- if you include mixed case in your search, assumes you want case-sensitive
 
 vim.opt.cursorline = true
 
@@ -42,6 +42,7 @@ vim.opt.termguicolors = true
 
 --adds autocomplete drop down from the current buffer
 vim.opt.autocomplete = true
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 ------------------------------------------------KEYMAPS-----------------------------------------------------------
 --leader keys
@@ -49,8 +50,8 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 vim.keymap.set('i', 'jk', '<ESC>')
-vim.keymap.set('n', 'j', 'gj', {desc = 'move visual lines instead of real lines'})
-vim.keymap.set('n', 'k', 'gk', {desc = 'move visual lines instead of real lines'})
+vim.keymap.set('n', 'j', 'gj', { desc = 'move visual lines instead of real lines' })
+vim.keymap.set('n', 'k', 'gk', { desc = 'move visual lines instead of real lines' })
 
 -- clears the search highlight on pressing <ESC> in normal mode
 vim.keymap.set('n', '<ESC>', '<cmd>nohlsearch<CR>')
@@ -78,11 +79,45 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup('my.lsp', {}),
+  callback = function(ev)
+    local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
+    if client:supports_method('textDocument/implementation') then
+      -- Create a keymap for vim.lsp.buf.implementation ...
+    end
+    -- Enable auto-completion. Note: Use CTRL-Y to select an item. |complete_CTRL-Y|
+    if client:supports_method('textDocument/completion') then
+      -- Optional: trigger autocompletion on EVERY keypress. May be slow!
+      -- local chars = {}; for i = 32, 126 do table.insert(chars, string.char(i)) end
+      -- client.server_capabilities.completionProvider.triggerCharacters = chars
+      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+    end
+    -- Auto-format ("lint") on save.
+    -- Usually not needed if server supports "textDocument/willSaveWaitUntil".
+    if not client:supports_method('textDocument/willSaveWaitUntil')
+        and client:supports_method('textDocument/formatting') then
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        group = vim.api.nvim_create_augroup('my.lsp', { clear = false }),
+        buffer = ev.buf,
+        callback = function()
+          vim.lsp.buf.format({ bufnr = ev.buf, id = client.id, timeout_ms = 1000 })
+        end,
+      })
+    end
+  end,
+})
+
 ------------------------------------------------LSP---------------------------------------------------------------
 ---NEOVIM LSP Docs: https://neovim.io/doc/user/lsp/#lsp
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- If we see poor performance on workspaces then uncomment below 3 lines
+-- if capabilities.workspace then
+--   capabilities.workspace.didChangeWatchedFiles = nil
+-- end
 
 --LUA LS: https://github.com/LuaLS/lua-language-server
---Installation instructions: 
+--Installation instructions:
 --1. Download the latest release from their github page
 --2. make sure /bin/ folder is in the PATH variable and `lua-language-server` command is accessible
 --3. configure the lsp as shown below
@@ -103,7 +138,9 @@ vim.lsp.config['lua_ls'] = {
         version = 'LuaJIT',
       }
     }
-  }
+  },
+
+  capabilities = capabilities,
 }
 
 vim.lsp.enable('lua_ls')
