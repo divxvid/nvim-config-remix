@@ -5,9 +5,9 @@ vim.opt.relativenumber = true
 vim.opt.number = true
 
 -- tabs & indentation
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smarttab = true
@@ -40,6 +40,9 @@ vim.opt.hlsearch = true
 
 vim.opt.termguicolors = true
 
+--adds autocomplete drop down from the current buffer
+vim.opt.autocomplete = true
+
 ------------------------------------------------KEYMAPS-----------------------------------------------------------
 --leader keys
 vim.g.mapleader = ' '
@@ -53,8 +56,8 @@ vim.keymap.set('n', 'k', 'gk', {desc = 'move visual lines instead of real lines'
 vim.keymap.set('n', '<ESC>', '<cmd>nohlsearch<CR>')
 
 --Diagnostics keymap
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+-- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
+-- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>cd', vim.diagnostic.open_float, { desc = 'Show [C]ode [D]iagnostics' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'open diagnostics [Q]uickfix list' })
 
@@ -71,5 +74,41 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
     vim.highlight.on_yank()
   end,
+})
+
+------------------------------------------------LSP---------------------------------------------------------------
+---NEOVIM LSP Docs: https://neovim.io/doc/user/lsp/#lsp
+
+--LUA LS: https://github.com/LuaLS/lua-language-server
+--Installation instructions: 
+--1. Download the latest release from their github page
+--2. make sure /bin/ folder is in the PATH variable and `lua-language-server` command is accessible
+--3. configure the lsp as shown below
+vim.lsp.config['lua_ls'] = {
+  -- Command and args to start the server
+  cmd = { 'lua-language-server' },
+  --Filetypes to automatically attach to
+  filetype = { 'lua' },
+  -- Sets the "workspace" to the directory where any of these files is found.
+  -- Files that share a root directory will reuse the LSP server connection.
+  -- Nested lists indicate equal priority, see |vim.lsp.Config|.
+  root_markers = { { '.luarc.json', '.luarc.jsonc' }, '.git' },
+  -- Specific settings to send to the server. The schema is server-defined.
+  -- Example: https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+      }
+    }
+  }
+}
+
+vim.lsp.enable('lua_ls')
+
+------------------------------------------------PACKAGES-----------------------------------------------------------
+local gh = function(x) return 'https://github.com/' .. x end
+vim.pack.add({
+  gh('tpope/vim-fugitive'),
 })
 
