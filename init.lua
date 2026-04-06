@@ -44,6 +44,8 @@ vim.opt.termguicolors = true
 vim.opt.autocomplete = true
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
+require('vim._core.ui2').enable({})
+
 ------------------------------------------------KEYMAPS-----------------------------------------------------------
 --leader keys
 vim.g.mapleader = ' '
