@@ -103,6 +103,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 --     vim.bo[ev.buf].syntax = 'ON' -- only if additional legacy syntax is needed
 --   end
 -- })
+
 ------------------------------------------------LSP---------------------------------------------------------------
 ---NEOVIM LSP Docs: https://neovim.io/doc/user/lsp/#lsp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -179,8 +180,12 @@ vim.pack.add({
 
   --telescope
   gh('nvim-lua/plenary.nvim'),
-  gh('nvim-telescope/telescope.nvim')
+  gh('nvim-telescope/telescope.nvim'),
+
+  gh('miikanissi/modus-themes.nvim'),
 })
+
+vim.cmd([[colorscheme modus]])
 
 require('oil').setup({
   view_options = {
