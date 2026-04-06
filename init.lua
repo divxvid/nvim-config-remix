@@ -90,7 +90,7 @@ vim.lsp.config['lua_ls'] = {
   -- Command and args to start the server
   cmd = { 'lua-language-server' },
   --Filetypes to automatically attach to
-  filetype = { 'lua' },
+  filetypes = { 'lua' },
   -- Sets the "workspace" to the directory where any of these files is found.
   -- Files that share a root directory will reuse the LSP server connection.
   -- Nested lists indicate equal priority, see |vim.lsp.Config|.
