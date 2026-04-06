@@ -64,6 +64,8 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'open diagn
 --add a closing bracket with indent, good for lots of stuff
 vim.keymap.set('i', '{<CR>', '{<CR>}<ESC>O')
 
+--Open oil in the parent directory
+vim.keymap.set('n', '-', '<CMD>Oil<CR>')
 ------------------------------------------------AUTOCMDs-----------------------------------------------------------
 -- Highlight when yanking (copying) text
 -- Try it with `yap` in normal mode
@@ -107,8 +109,16 @@ vim.lsp.config['lua_ls'] = {
 vim.lsp.enable('lua_ls')
 
 ------------------------------------------------PACKAGES-----------------------------------------------------------
+---Documentation: https://neovim.io/doc/user/pack/
 local gh = function(x) return 'https://github.com/' .. x end
+
 vim.pack.add({
   gh('tpope/vim-fugitive'),
+  gh('stevearc/oil.nvim'),
 })
 
+require('oil').setup({
+  view_options = {
+    show_hidden = true,
+  }
+})
