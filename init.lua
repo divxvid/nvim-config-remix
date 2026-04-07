@@ -183,9 +183,21 @@ vim.pack.add({
   gh('nvim-telescope/telescope.nvim'),
 
   gh('miikanissi/modus-themes.nvim'),
+
+  gh('lewis6991/gitsigns.nvim'),
 })
 
 vim.cmd([[colorscheme modus]])
+
+require('gitsigns').setup({
+  signs = {
+    add = { text = '+' },
+    change = { text = '~' },
+    delete = { text = '_' },
+    topdelete = { text = '‾' },
+    changedelete = { text = '~' },
+  },
+})
 
 require('oil').setup({
   view_options = {
