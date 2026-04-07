@@ -80,7 +80,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
-
 ------------------------------------------------TREESITTER-----------------------------------------------------------
 -- NEOVIM Docs: https://neovim.io/doc/user/treesitter/#treesitter
 -- Install treesitter CLI from: https://github.com/tree-sitter/tree-sitter/releases
@@ -185,6 +184,7 @@ vim.pack.add({
   gh('miikanissi/modus-themes.nvim'),
 
   gh('lewis6991/gitsigns.nvim'),
+  gh('nvim-mini/mini.statusline'),
 })
 
 vim.cmd([[colorscheme modus]])
@@ -204,6 +204,8 @@ require('oil').setup({
     show_hidden = true,
   }
 })
+
+require('mini.statusline').setup({})
 
 require('telescope').setup({})
 local builtin = require('telescope.builtin')
