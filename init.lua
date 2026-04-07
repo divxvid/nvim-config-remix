@@ -27,7 +27,7 @@ vim.opt.clipboard:append('unnamedplus') --use system clipboard as default regist
 vim.opt.scrolloff = 10
 vim.opt.mouse = 'a'
 
--- vim.opt.showmode = false --does not show modes since it's already available in status line
+vim.opt.showmode = false --does not show modes since it's already available in status line
 vim.opt.breakindent = true
 vim.opt.signcolumn = 'yes'
 vim.opt.timeoutlen = 300
