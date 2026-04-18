@@ -95,13 +95,21 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- To register a named parser for specific filetype, we can use:
 -- vim.treesitter.language.register('xml', { 'svg', 'xslt' })
 
--- vim.api.nvim_create_autocmd('FileType', {
---   pattern = 'cpp',
---   callback = function(ev)
---     vim.treesitter.start(ev.buf, 'cpp')
---     vim.bo[ev.buf].syntax = 'ON' -- only if additional legacy syntax is needed
---   end
--- })
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { '*.cpp', '*.hpp', '*.h' },
+  callback = function(ev)
+    vim.treesitter.start(ev.buf, 'cpp')
+    vim.bo[ev.buf].syntax = 'ON' -- only if additional legacy syntax is needed
+  end
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'python',
+  callback = function(ev)
+    vim.treesitter.start(ev.buf, 'python')
+    vim.bo[ev.buf].syntax = 'ON' -- only if additional legacy syntax is needed
+  end
+})
 
 ------------------------------------------------LSP---------------------------------------------------------------
 ---NEOVIM LSP Docs: https://neovim.io/doc/user/lsp/#lsp
