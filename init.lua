@@ -27,6 +27,8 @@ vim.opt.clipboard:append('unnamedplus') --use system clipboard as default regist
 vim.opt.scrolloff = 10
 vim.opt.mouse = 'a'
 
+vim.o.wildmenu = true
+vim.o.wildmode = "longest:full,full"
 vim.opt.showmode = false --does not show modes since it's already available in status line
 vim.opt.breakindent = true
 vim.opt.signcolumn = 'yes'
@@ -94,20 +96,19 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 --
 -- To register a named parser for specific filetype, we can use:
 -- vim.treesitter.language.register('xml', { 'svg', 'xslt' })
+--
+-- In order to add syntax highligting and other stuff, we need to add treesitter queries(.scm)
+-- we can find treesitter queries for most of the languages here: https://github.com/nvim-treesitter/nvim-treesitter/tree/main/runtime/queries
+-- To make them work, we need to put them under $VIMRUNTIMEPATH/queries/<lang> (as seen in repo)
+-- Typical path is /nvim-data/site/queries/<lang> but I'm using this one:
+-- /nvim/queries (bundled with the config)
+-- We need the below autocmd to start the treesitter library for highlighting
 
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { '*.cpp', '*.hpp', '*.h' },
+  pattern = 'cpp',
   callback = function(ev)
     vim.treesitter.start(ev.buf, 'cpp')
-    vim.bo[ev.buf].syntax = 'ON' -- only if additional legacy syntax is needed
-  end
-})
-
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'python',
-  callback = function(ev)
-    vim.treesitter.start(ev.buf, 'python')
-    vim.bo[ev.buf].syntax = 'ON' -- only if additional legacy syntax is needed
+    -- vim.bo[ev.buf].syntax = 'ON' -- only if additional legacy syntax is needed
   end
 })
 
