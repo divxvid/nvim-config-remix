@@ -155,8 +155,14 @@ vim.lsp.config['lua_ls'] = {
 
   capabilities = capabilities,
 }
+vim.lsp.config('expert', {
+  cmd = { 'expert', '--stdio' },
+  root_markers = { 'mix.exs', '.git' },
+  file_types = { 'elixir', 'eelixir', 'heex' },
+})
 
 vim.lsp.enable('lua_ls')
+vim.lsp.enable('expert')
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup('my.lsp', {}),
