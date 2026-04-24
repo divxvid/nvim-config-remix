@@ -104,13 +104,22 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- /nvim/queries (bundled with the config)
 -- We need the below autocmd to start the treesitter library for highlighting
 
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'cpp',
-  callback = function(ev)
-    vim.treesitter.start(ev.buf, 'cpp')
-    -- vim.bo[ev.buf].syntax = 'ON' -- only if additional legacy syntax is needed
+local treesitter_languages = {
+  cpp = true,
+  elixir = true,
+}
+
+for lang, enable in pairs(treesitter_languages) do
+  if enable then
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = lang,
+      callback = function(ev)
+        vim.treesitter.start(ev.buf, lang)
+        -- vim.bo[ev.buf].syntax = 'ON' -- only if additional legacy syntax is needed
+      end
+    })
   end
-})
+end
 
 ------------------------------------------------LSP---------------------------------------------------------------
 ---NEOVIM LSP Docs: https://neovim.io/doc/user/lsp/#lsp
