@@ -155,14 +155,25 @@ vim.lsp.config['lua_ls'] = {
 
   capabilities = capabilities,
 }
-vim.lsp.config('expert', {
-  cmd = { 'expert', '--stdio' },
-  root_markers = { 'mix.exs', '.git' },
+-- vim.lsp.config('expert', {
+--   cmd = { 'expert', '--stdio' },
+--   root_markers = { 'mix.exs', '.git' },
+--   file_types = { 'elixir', 'eelixir', 'heex' },
+-- })
+vim.lsp.config('dexter', {
+  cmd = { 'dexter', 'lsp' },
+  root_markers = { '.dexter/dexter.db', 'dexter.db', '.git', 'mix.exs' },
   file_types = { 'elixir', 'eelixir', 'heex' },
+  init_options = {
+    followDelegates = true, -- jump through defdelegate to the target function
+    -- stdlibPath = "",      -- override Elixir stdlib path (auto-detected)
+    -- debug = false,        -- verbose logging to stderr (view with :LspLog)
+  }
 })
 
 vim.lsp.enable('lua_ls')
-vim.lsp.enable('expert')
+-- vim.lsp.enable('expert')
+vim.lsp.enable('dexter')
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup('my.lsp', {}),
