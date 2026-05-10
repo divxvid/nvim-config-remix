@@ -213,6 +213,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
+vim.keymap.set('n', 'grd', vim.lsp.buf.definition, { desc = "go to definition" })
+
 ------------------------------------------------PACKAGES-----------------------------------------------------------
 ---Documentation: https://neovim.io/doc/user/pack/
 local gh = function(x) return 'https://github.com/' .. x end
