@@ -163,8 +163,9 @@ vim.lsp.config['lua_ls'] = {
 -- })
 vim.lsp.config('dexter', {
   cmd = { 'dexter', 'lsp' },
-  root_markers = { '.dexter/dexter.db', 'dexter.db', '.git', 'mix.exs' },
   file_types = { 'elixir', 'eelixir', 'heex' },
+  -- root_markers = { '.dexter/dexter.db', 'dexter.db', 'mix.exs', '.git' },
+  root_markers = { '.dexter/dexter.db', 'dexter.db', 'mix.exs' },
   init_options = {
     followDelegates = true, -- jump through defdelegate to the target function
     -- stdlibPath = "",      -- override Elixir stdlib path (auto-detected)
@@ -174,8 +175,8 @@ vim.lsp.config('dexter', {
 
 vim.lsp.config('gopls', {
   cmd = { 'gopls' },
-  filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
-  root_markers = { '.git', 'go.mod' },
+  filetypes = { 'go', 'gomod', 'gowork' },
+  root_markers = { 'go.mod' },
 })
 
 vim.lsp.enable('lua_ls')
