@@ -107,6 +107,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 local treesitter_languages = {
   cpp = true,
   elixir = true,
+  go = true,
 }
 
 for lang, enable in pairs(treesitter_languages) do
@@ -171,9 +172,16 @@ vim.lsp.config('dexter', {
   }
 })
 
+vim.lsp.config('gopls', {
+  cmd = { 'gopls' },
+  filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+  root_markers = { '.git', 'go.mod' },
+})
+
 vim.lsp.enable('lua_ls')
 -- vim.lsp.enable('expert')
 vim.lsp.enable('dexter')
+vim.lsp.enable('gopls')
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup('my.lsp', {}),
