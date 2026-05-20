@@ -1,4 +1,5 @@
 -- https://dotfiles.substack.com/p/whats-new-in-neovim-012
+require('vim._core.ui2').enable({})
 
 ---------------------------------------------------OPTIONS---------------------------------------------------------
 vim.opt.relativenumber = true
@@ -46,7 +47,6 @@ vim.opt.termguicolors = true
 vim.opt.autocomplete = true
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
-require('vim._core.ui2').enable({})
 
 ------------------------------------------------KEYMAPS-----------------------------------------------------------
 --leader keys
